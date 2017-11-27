@@ -15,7 +15,6 @@ class RaceFinder::Scraper
         if d.size > 0 && d[0]["class"] != "gad"
             #binding.pry
             races << {
-                
                 :type => d[0].text,
                 :date => d[1].text,
                 :name => d[2].text,

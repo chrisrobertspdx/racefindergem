@@ -1,6 +1,6 @@
 class RaceFinder::CLI
   attr_accessor :calendar
-  BASE_URL = 'http://www.racecenter.org'
+  BASE_URL = 'https://www.racecenter.org/race-calendar/'
 
   def run
     puts "Hello. I would like to help you find a bike race."
@@ -50,7 +50,7 @@ class RaceFinder::CLI
   def get_details(index)
     this_race = self.calendar.races[index-1]
     if this_race.description == nil
-      this_race.update(RaceFinder::Scraper.scrape_detail("#{BASE_URL}/#{this_race.url}"))
+      this_race.update(RaceFinder::Scraper.scrape_detail("#{BASE_URL}#{this_race.url}"))
     end
     this_race.show_details
   end
