@@ -3,4 +3,15 @@ class RaceFinder::Race
     def initialize(attr)
         attr.each {|key, value| self.send(("#{key}="), value)}
     end
+    def update(attr)
+        attr.each {|key, value| self.send(("#{key}="), value)}
+    end
+    def show_details
+       puts "#{self.type.upcase}"
+       puts "#{self.name} | #{self.date} | #{self.location}"
+       puts "Venue: #{self.venue}"
+       puts "---------------"
+       puts self.detail
+       puts "---------------"
+    end
 end

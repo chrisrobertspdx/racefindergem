@@ -5,6 +5,7 @@ require "race_finder"
 require "race_finder/cli"
 require "race_finder/calendar"
 require "race_finder/race"
+require "race_finder/scraper"
 
 # You can add fixtures and/or initialization code here to make experimenting
 # with your gem easier. You can also use a different console, if you like.
