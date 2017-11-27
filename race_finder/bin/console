@@ -1,5 +1,9 @@
 #!/usr/bin/env ruby
 
+require 'pry'
+require 'nokogiri'
+require 'open-uri'
+
 require "bundler/setup"
 require "race_finder"
 require "race_finder/cli"
