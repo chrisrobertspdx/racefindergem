@@ -30,21 +30,14 @@ class RaceFinder::Scraper
   def self.scrape_detail(url)
     detail = self.get_detail(url)
     data = {
-    #:phone => detail.css("p.phone_numbers a")[0].text.gsub("Phone ",""),
-    :venue => detail.css("p.mainaddress").text.gsub("/\n/",",").split.join(" "),
-    :description => detail.css("div.location--main_description").text.split.join(" ")
+    :description => detail.css("p#info").text.split.join(" ")
     }
-    #if detail.css("div.alert_banner").count == 1
-      #puts detail.css("div.alert_banner").text
-      #data[:alert] = detail.css("div.alert_banner").text.split.join(" ")
-    #end
     data
   end
-  def self.scrape_detail_xpath(url)
-    detail = self.get_detail(url)
-    data = {
-      :phone => detail.xpath("/html/body/div[3]/div[2]/div[1]/div[2]").text.split.join(" ")
-    }
-    
-  end
+  #def self.scrape_detail_xpath(url)
+    #detail = self.get_detail(url)
+    #data = {
+    #  :phone => detail.xpath("/html/body/div[3]/div[2]/div[1]/div[2]").text.split.join(" ")
+    # }
+  #end
 end

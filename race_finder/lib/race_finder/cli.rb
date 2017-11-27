@@ -13,11 +13,15 @@ class RaceFinder::CLI
   end
   
   def add_races_to_calendar
-    self.calendar = RaceFinder::Calendar.new(type: "Bike Races")
+    self.calendar = RaceFinder::Calendar.new(type: "My Races")
+    race_data = RaceFinder::Scraper.scrape_index("#{BASE_URL}")
+    race_data.each {|d|
+      self.calendar.races << RaceFinder::Race.new(d)
+    }
     #scrape races
     #iterate and add each to calendar
-    self.calendar.races << RaceFinder::Race.new(name: "Crusade 1")
-    self.calendar.races << RaceFinder::Race.new(name: "Crusade 2")
+    #self.calendar.races << RaceFinder::Race.new(name: "Crusade 1")
+    #self.calendar.races << RaceFinder::Race.new(name: "Crusade 2")
   end
     
   def list_races
@@ -38,19 +42,17 @@ class RaceFinder::CLI
         puts "Goodbye"
         break
       else
-        #get_details(input)
-        #check to see if we have all info
-        #if necessary scrape and update
-        #get race details
+        get_details(input.to_i)
       end
     end
   end
   
   def get_details(index)
-    if self.calendar.races[index-1].detail == nil
-      #scrape and update
+    this_race = self.calendar.races[index-1]
+    if this_race.description == nil
+      this_race.update(RaceFinder::Scraper.scrape_detail("#{BASE_URL}/#{this_race.url}"))
     end
-    self.calendar.races[index-1].show_details
+    this_race.show_details
   end
   
 end
