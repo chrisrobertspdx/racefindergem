@@ -1,5 +1,5 @@
 class RaceFinder::Race
-    attr_accessor :name, :type, :date, :location, :detail, :venue
+    attr_accessor :name, :type, :date, :location, :description, :venue, :url
     def initialize(attr)
         attr.each {|key, value| self.send(("#{key}="), value)}
     end
@@ -9,9 +9,8 @@ class RaceFinder::Race
     def show_details
        puts "#{self.type.upcase}"
        puts "#{self.name} | #{self.date} | #{self.location}"
-       puts "Venue: #{self.venue}"
        puts "---------------"
-       puts self.detail
+       puts self.description
        puts "---------------"
     end
 end
