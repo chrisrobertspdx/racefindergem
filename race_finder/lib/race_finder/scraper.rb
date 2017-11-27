@@ -10,22 +10,19 @@ class RaceFinder::Scraper
     races = []
     html_block = self.get_page(index).css("table#calendarlist tr")
     html_block.each {|r|
-      r.css("td").each {|td|
-        #if td.css("div").size == 0 #filter out google ad
-        if td["class"] != "gad" #filter out google ad
-            #puts td["class"]
-            puts td.text
-            
+      #binding.pry
+      d = r.css("td")
+        if d.size > 0 && d[0]["class"] != "gad"
+            #binding.pry
+            races << {
+                
+                :type => d[0].text,
+                :date => d[1].text,
+                :name => d[2].text,
+                :url => d[2].css("a").attribute("href").value,
+                :location => d[3].text
+            }
         end
-      }
-      puts "-----"
-      #races << {
-      #:url => f.css("a.linkurl")[0].attribute("href").value,
-      #:type => f.css("a.linkurl")[0].attribute("href").value.split("/")[2],
-      #:name => f.css("a.linkurl")[0].text,
-      #:date => f.css("a.linkurl")[0].text,
-      #:location => f.css("a.linkurl")[0].text
-      #}
     }
     races
   end
